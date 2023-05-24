@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "782408760749",
+    "project_id": "bandapp-18967",
+    "storage_bucket": "bandapp-18967.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782408760749:android:6459354ed9e9d2bf57b524",
+        "android_client_info": {
+          "package_name": "com.example.my_audio_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782408760749-m0v0nd2ja5ht71aeubk54bi04100t2fr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKZV4Ymhn4q1dXFoE-ctBHbqj80lOg_BM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782408760749-m0v0nd2ja5ht71aeubk54bi04100t2fr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "782408760749-8ge54k4nq4oa13dvbj8scaet2t7is724.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myAudioFlutter"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:782408760749:android:1ac195ba06a5596357b524",
+        "android_client_info": {
+          "package_name": "com.victorberral.bandapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "782408760749-ar2i1bo0e140aq4ot4df9r6495898obq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.victorberral.bandapp",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "782408760749-m0v0nd2ja5ht71aeubk54bi04100t2fr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKZV4Ymhn4q1dXFoE-ctBHbqj80lOg_BM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "782408760749-m0v0nd2ja5ht71aeubk54bi04100t2fr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "782408760749-8ge54k4nq4oa13dvbj8scaet2t7is724.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myAudioFlutter"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
