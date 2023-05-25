@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_audio_flutter/views/home_page.dart';
 import 'package:my_audio_flutter/views/recorder_page.dart';
-import 'package:my_audio_flutter/views/songs.dart';
+import 'package:my_audio_flutter/views/songs_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../widgets/firebase_item_list.dart';
 
-import '../connections/firebase_db.dart';
+// ignore: constant_identifier_names
+const String FIREBASE_COLLECTION_NAME = 'songs';
 
 class SongsView extends StatefulWidget {
   const SongsView({super.key});
@@ -13,7 +15,7 @@ class _SongsViewState extends State<SongsView> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FirestoreItemList(),
+      child: FirestoreItemList(FIREBASE_COLLECTION_NAME),
     );
   }
 }

@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreItemList extends StatelessWidget {
+  FirestoreItemList(this.collection, {super.key});
+
+  final String collection;
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: firestore.collection('songs').snapshots(),
+      stream: firestore.collection(collection).snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
 
         final items = snapshot.data!.docs;
@@ -19,14 +22,34 @@ class FirestoreItemList extends StatelessWidget {
           itemCount: items.length,
           itemBuilder: (context, index) {
             final item = items[index].data() as Map<String, dynamic>;
-
-            return ListTile(
+            return Card(
+              child: ListTile(
+                title: Text(item['name']),
+                trailing: Column(
+                  children: <Widget>[
+                    IconButton(
+                      icon: const Icon(Icons.more_vert),
+                      onPressed: () {},
+                    )
+                  ],
+                ),
+              ),
+            );
+            /*return ListTile(
               title: Text(item['name']),
-              subtitle: Text(item['key']),
+              //subtitle: Text(item['key']),
+              trailing: Column(
+                children: <Widget>[
+                  //const Text('inside column'),
+                  IconButton(
+                      icon: const Icon(Icons.chevron_right_outlined),
+                      onPressed: () {})
+                ],
+              ),
               onTap: () {
                 _editItem(context, items[index].reference);
               },
-            );
+            );*/
           },
         );
       },
@@ -45,10 +68,10 @@ class FirestoreItemList extends StatelessWidget {
 class EditItemScreen extends StatefulWidget {
   final DocumentReference reference;
 
-  EditItemScreen({required this.reference});
+  const EditItemScreen({super.key, required this.reference});
 
   @override
-  _EditItemScreenState createState() => _EditItemScreenState();
+  State<EditItemScreen> createState() => _EditItemScreenState();
 }
 
 class _EditItemScreenState extends State<EditItemScreen> {
@@ -59,31 +82,31 @@ class _EditItemScreenState extends State<EditItemScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Item'),
+        title: const Text('Edit Item'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Name',
               ),
             ),
             TextField(
               controller: _descriptionController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Description',
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 _saveChanges();
                 Navigator.pop(context);
               },
-              child: Text('Save Changes'),
+              child: const Text('Save Changes'),
             ),
           ],
         ),
