@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:my_audio_flutter/screens/song_detail_screen.dart';
 
 class FirestoreItemList extends StatelessWidget {
   FirestoreItemList(this.collection, {super.key});
@@ -29,7 +30,9 @@ class FirestoreItemList extends StatelessWidget {
                   children: <Widget>[
                     IconButton(
                       icon: const Icon(Icons.more_vert),
-                      onPressed: () {},
+                      onPressed: () {
+                        _viewItem(context, items[index].reference);
+                      },
                     )
                   ],
                 ),
@@ -61,6 +64,14 @@ class FirestoreItemList extends StatelessWidget {
       context,
       MaterialPageRoute(
           builder: (context) => EditItemScreen(reference: reference)),
+    );
+  }
+
+  void _viewItem(BuildContext context, DocumentReference reference) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ViewSongScreen(reference: reference)),
     );
   }
 }

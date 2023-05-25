@@ -41,13 +41,13 @@ class _MainScreenState extends State<MainScreen> {
             backgroundColor: colors.primary,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.fiber_manual_record),
+            icon: const Icon(Icons.mic_rounded),
             //activeIcon: const Icon(Icons.person_3),
-            label: 'REC',
+            label: 'Recorder',
             backgroundColor: colors.primary,
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.music_note),
+            icon: const Icon(Icons.my_library_music),
             //activeIcon: const Icon(Icons.settings),
             label: 'Songs',
             backgroundColor: colors.primary,
