@@ -116,12 +116,13 @@ class _AudioRecorderState extends State<AudioRecorder> {
   }
 
   Widget _buildRecordStopControl() {
+    final colors = Theme.of(context).colorScheme;
     late Icon icon;
     late Color color;
 
     if (_recordState != RecordState.stop) {
-      icon = const Icon(Icons.stop, color: Colors.red, size: 30);
-      color = Colors.red.withOpacity(0.1);
+      icon = Icon(Icons.stop, color: colors.error, size: 30);
+      color = colors.error.withOpacity(0.1);
     } else {
       final theme = Theme.of(context);
       icon = Icon(Icons.mic, color: theme.primaryColor, size: 30);
@@ -142,6 +143,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
   }
 
   Widget _buildPauseResumeControl() {
+    final colors = Theme.of(context).colorScheme;
     if (_recordState == RecordState.stop) {
       return const SizedBox.shrink();
     }
@@ -150,11 +152,11 @@ class _AudioRecorderState extends State<AudioRecorder> {
     late Color color;
 
     if (_recordState == RecordState.record) {
-      icon = const Icon(Icons.pause, color: Colors.red, size: 30);
-      color = Colors.red.withOpacity(0.1);
+      icon = Icon(Icons.pause, color: colors.error, size: 30);
+      color = colors.error.withOpacity(0.1);
     } else {
       final theme = Theme.of(context);
-      icon = const Icon(Icons.play_arrow, color: Colors.red, size: 30);
+      icon = Icon(Icons.play_arrow, color: colors.error, size: 30);
       color = theme.primaryColor.withOpacity(0.1);
     }
 
@@ -180,12 +182,13 @@ class _AudioRecorderState extends State<AudioRecorder> {
   }
 
   Widget _buildTimer() {
+    final colors = Theme.of(context).colorScheme;
     final String minutes = _formatNumber(_recordDuration ~/ 60);
     final String seconds = _formatNumber(_recordDuration % 60);
 
     return Text(
       '$minutes : $seconds',
-      style: const TextStyle(color: Colors.red),
+      style: TextStyle(color: colors.error),
     );
   }
 

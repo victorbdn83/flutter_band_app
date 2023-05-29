@@ -17,7 +17,11 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
 
-    final screens = [const HomeView(), const RecorderView(), const SongsView()];
+    final screens = [
+      const HomeView(),
+      const RecorderView(),
+      const SongsView(),
+    ];
 
     return Scaffold(
       body: IndexedStack(

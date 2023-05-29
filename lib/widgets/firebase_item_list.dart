@@ -10,6 +10,8 @@ class FirestoreItemList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return StreamBuilder<QuerySnapshot>(
       stream: firestore.collection(collection).snapshots(),
       builder: (context, snapshot) {
@@ -24,6 +26,7 @@ class FirestoreItemList extends StatelessWidget {
           itemBuilder: (context, index) {
             final item = items[index].data() as Map<String, dynamic>;
             return Card(
+              color: colors.primary.withOpacity(0.9),
               child: ListTile(
                 title: Text(item['name']),
                 trailing: Column(
@@ -59,13 +62,13 @@ class FirestoreItemList extends StatelessWidget {
     );
   }
 
-  void _editItem(BuildContext context, DocumentReference reference) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => EditItemScreen(reference: reference)),
-    );
-  }
+  // void _editItem(BuildContext context, DocumentReference reference) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(
+  //         builder: (context) => EditItemScreen(reference: reference)),
+  //   );
+  // }
 
   void _viewItem(BuildContext context, DocumentReference reference) {
     Navigator.push(

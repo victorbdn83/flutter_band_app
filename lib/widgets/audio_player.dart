@@ -65,6 +65,8 @@ class AudioPlayerState extends State<AudioPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return LayoutBuilder(
       builder: (context, constraints) {
         return Row(
@@ -74,8 +76,8 @@ class AudioPlayerState extends State<AudioPlayer> {
             _buildControl(),
             _buildSlider(constraints.maxWidth),
             IconButton(
-              icon: const Icon(Icons.delete,
-                  color: Color(0xFF73748D), size: _deleteBtnSize),
+              icon: Icon(Icons.delete_forever_sharp,
+                  color: colors.error, size: _deleteBtnSize),
               onPressed: () {
                 stop().then((value) => widget.onDelete());
               },
@@ -87,16 +89,16 @@ class AudioPlayerState extends State<AudioPlayer> {
   }
 
   Widget _buildControl() {
+    final colors = Theme.of(context).colorScheme;
     Icon icon;
     Color color;
 
     if (_audioPlayer.state == ap.PlayerState.playing) {
-      icon = const Icon(Icons.pause, color: Colors.red, size: 30);
-      color = Colors.red.withOpacity(0.1);
+      icon = Icon(Icons.pause, color: colors.primary, size: 30);
+      color = colors.primary.withOpacity(0.1);
     } else {
-      final theme = Theme.of(context);
-      icon = Icon(Icons.play_arrow, color: theme.primaryColor, size: 30);
-      color = theme.primaryColor.withOpacity(0.1);
+      icon = Icon(Icons.play_arrow, color: colors.primary, size: 30);
+      color = colors.primary.withOpacity(0.1);
     }
 
     return ClipOval(
