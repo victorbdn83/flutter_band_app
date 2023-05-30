@@ -60,23 +60,24 @@ class _ViewSongScreenState extends State<ViewSongScreen>
               ),
             ),
             */
-            SectionCard(
-              body: "sfsfs",
-              sectionName: "Chords",
-              bgColor: colors.secondaryContainer,
-              icon: Icons.music_note,
+            NewSectionCard(
+              "sfsfs",
+              "Chords",
+              colors.secondaryContainer,
+              Icons.music_note,
             ),
-            SectionCard(
-              body: "sefsrfewrwer",
-              sectionName: "Recordings",
-              bgColor: colors.tertiaryContainer,
-              icon: Icons.mic,
+            NewSectionCard(
+              _lyrics,
+              'Lyrics',
+              colors.primaryContainer,
+              Icons.abc,
             ),
-            SectionCard(
-                body: _lyrics,
-                sectionName: 'Lyrics',
-                bgColor: colors.primaryContainer,
-                icon: Icons.abc),
+            NewSectionCard(
+              "sefsrfewrwer",
+              "Recordings",
+              colors.tertiaryContainer,
+              Icons.mic,
+            ),
           ],
 
           /*
@@ -290,38 +291,145 @@ class SectionCard extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
 
     return Expanded(
-      flex: 3,
+      //flex: 7,
       child: Card(
-        color: _bgColor,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: _bgColor,
+            width: 2.5,
+          ),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        color: colors.inversePrimary.withOpacity(0.3),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  Icon(
-                    _icon,
-                    color: colors.onPrimary,
+              InkWell(
+                onTap: () {
+                  debugPrint("Tapped {$_sectionName}}");
+                },
+                child: Container(
+                  color: colors.inversePrimary.withOpacity(0.1),
+                  child: Row(
+                    children: [
+                      Icon(
+                        _icon,
+                        color: colors.onPrimary,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          _sectionName,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 24,
+                              color: colors.onPrimary),
+                        ),
+                      )
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      _sectionName,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 24,
-                          color: colors.onPrimary),
-                    ),
-                  )
-                ],
+                ),
               ),
-              Row(
-                children: [
-                  Text(
-                    _body,
-                    style: TextStyle(color: colors.onPrimary),
+              Flexible(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        _body,
+                        overflow: TextOverflow.fade,
+                        style: TextStyle(color: colors.onPrimary),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NewSectionCard extends StatefulWidget {
+  final String body;
+  final String sectionName;
+  final Color bgColor;
+  final IconData icon;
+
+  const NewSectionCard(this.body, this.sectionName, this.bgColor, this.icon,
+      {super.key});
+
+  @override
+  State<NewSectionCard> createState() => _NewSectionCardState();
+}
+
+class _NewSectionCardState extends State<NewSectionCard> {
+  bool isExpanded = false;
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Expanded(
+      flex: isExpanded ? 6 : 1,
+      child: Card(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: widget.bgColor,
+            width: 2.5,
+          ),
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        color: colors.surfaceVariant,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  debugPrint("Tapped {$widget.sectionName}}");
+                  setState(() {
+                    isExpanded = !isExpanded;
+                  });
+                },
+                child: Container(
+                  color: colors.inversePrimary.withOpacity(0.1),
+                  child: Row(
+                    children: [
+                      Icon(
+                        widget.icon,
+                        color: colors.onSurfaceVariant,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          widget.sectionName,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                            color: colors.onSurfaceVariant,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                ],
+                ),
+              ),
+              Flexible(
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        widget.body,
+                        overflow: TextOverflow.fade,
+                        style: TextStyle(color: colors.onPrimary),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

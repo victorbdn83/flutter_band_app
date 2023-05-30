@@ -26,13 +26,14 @@ class FirestoreItemList extends StatelessWidget {
           itemBuilder: (context, index) {
             final item = items[index].data() as Map<String, dynamic>;
             return Card(
-              color: colors.primary.withOpacity(0.9),
+              color: colors.primary,
               child: ListTile(
-                title: Text(item['name']),
+                title: Text(item['name'],
+                    style: TextStyle(color: colors.onPrimary)),
                 trailing: Column(
                   children: <Widget>[
                     IconButton(
-                      icon: const Icon(Icons.more_vert),
+                      icon: Icon(Icons.more_vert, color: colors.onPrimary),
                       onPressed: () {
                         _viewItem(context, items[index].reference);
                       },

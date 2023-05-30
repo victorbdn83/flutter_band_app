@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const FlexScheme usedScheme = FlexScheme.blueWhale;
+    const FlexScheme usedScheme = FlexScheme.limeM3;
 
     return MaterialApp(
       title: 'Material App',
