@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../widgets/audio_recorder.dart';
 
 class ViewSongScreen extends StatefulWidget {
   final DocumentReference reference;
@@ -78,6 +78,11 @@ class _ViewSongScreenState extends State<ViewSongScreen>
               colors.tertiaryContainer,
               Icons.mic,
             ),
+            ElevatedButton(
+                child: const Text("Record"),
+                onPressed: () {
+                  showRecording();
+                }),
           ],
 
           /*
@@ -239,6 +244,24 @@ class _ViewSongScreenState extends State<ViewSongScreen>
           //     ),
           //   ),
           //],
+        ),
+      ),
+    );
+  }
+
+  void showRecording() {
+    showModalBottomSheet(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      context: context,
+      builder: (context) => Container(
+        height: 300,
+        child: AudioRecorder(
+          onStop: (String path) {
+            debugPrint(path);
+          },
+          baseFileName: _name,
         ),
       ),
     );

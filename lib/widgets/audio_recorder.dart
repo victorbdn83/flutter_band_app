@@ -1,13 +1,17 @@
 import 'dart:async';
-
+import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:record/record.dart';
+import 'package:path_provider/path_provider.dart';
 
 class AudioRecorder extends StatefulWidget {
   final void Function(String path) onStop;
+  final String baseFileName;
 
-  const AudioRecorder({Key? key, required this.onStop}) : super(key: key);
+  const AudioRecorder(
+      {Key? key, required this.onStop, required this.baseFileName})
+      : super(key: key);
 
   @override
   State<AudioRecorder> createState() => _AudioRecorderState();
@@ -48,8 +52,15 @@ class _AudioRecorderState extends State<AudioRecorder> {
 
         // final devs = await _audioRecorder.listInputDevices();
         // final isRecording = await _audioRecorder.isRecording();
-
-        await _audioRecorder.start();
+        final path = await _localPath;
+        var timestamp = DateTime.timestamp(); // 31/12/2000, 22:00
+        final fileName = '$path/$timestamp-${widget.baseFileName}.m4a';
+        await _audioRecorder.start(
+          path: fileName,
+          encoder: AudioEncoder.aacLc, // by default
+          bitRate: 128000, // by default
+          samplingRate: 44100, // by default
+        );
         _recordDuration = 0;
 
         _startTimer();
@@ -68,6 +79,8 @@ class _AudioRecorderState extends State<AudioRecorder> {
     final path = await _audioRecorder.stop();
 
     if (path != null) {
+      debugPrint('Recording stopped: $path');
+      //saveFile("test.wav");
       widget.onStop(path);
     }
   }
@@ -208,4 +221,28 @@ class _AudioRecorderState extends State<AudioRecorder> {
       setState(() => _recordDuration++);
     });
   }
+}
+
+Future<String> get _localPath async {
+  final directory = await getApplicationDocumentsDirectory();
+  return directory.path;
+}
+
+Future<File> get _localFile async {
+  final path = await _localPath;
+  return File('$path/counter.txt');
+}
+
+Future<String> getFilePath(String fileName) async {
+  Directory appDocumentsDirectory = await getApplicationDocumentsDirectory();
+  String appDocumentsPath = appDocumentsDirectory.path;
+  String filePath = '$appDocumentsPath/$fileName';
+
+  return filePath;
+}
+
+void saveFile(String fileName) async {
+  File file = File(await getFilePath(fileName));
+  file.writeAsString(
+      "This is my demo text that will be saved to : demoTextFile.txt"); // 2
 }

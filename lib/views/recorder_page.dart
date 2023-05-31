@@ -44,6 +44,7 @@ class _RecorderViewState extends State<RecorderView> {
                 });
                 if (kDebugMode) print('List of recordings: $audioPaths');
               },
+              baseFileName: 'xxx.m4a',
             ),
     );
   }
