@@ -1,9 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:percent_indicator/percent_indicator.dart';
+import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class AudioRecorder extends StatefulWidget {
   final void Function(String path) onStop;
@@ -97,6 +100,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -112,8 +116,102 @@ class _AudioRecorderState extends State<AudioRecorder> {
         ),
         if (_amplitude != null) ...[
           const SizedBox(height: 40),
-          Text('Current: ${_amplitude?.current ?? 0.0}'),
-          Text('Max: ${_amplitude?.max ?? 0.0}'),
+          //Text('Current: ${_amplitude?.current ?? 0.0}'),
+          //Text('Max: ${_amplitude?.max ?? 0.0}'),
+          SfLinearGauge(
+            minimum: -80.0,
+            maximum: 10.0,
+            showTicks: true,
+            showLabels: true,
+            showAxisTrack: true,
+            barPointers: [
+              LinearBarPointer(
+                value: _amplitude!.current,
+                thickness: 10,
+                color: Colors.red,
+              ),
+            ],
+            ranges: [
+              LinearGaugeRange(
+                startValue: -80,
+                endValue: -6,
+                color: Colors.green.shade100,
+                //label: 'Low',
+                position: LinearElementPosition.outside,
+                //thickness: 10,
+                //sizeUnit: GaugeSizeUnit.factor,
+              ),
+              LinearGaugeRange(
+                startValue: -6,
+                endValue: -3,
+                color: Colors.green.shade700,
+                //label: 'Medium',
+                position: LinearElementPosition.outside,
+                //thickness: 10,
+                //sizeUnit: GaugeSizeUnit.factor,
+              ),
+              LinearGaugeRange(
+                startValue: -3,
+                endValue: 0,
+                color: Colors.orange,
+                //label: 'High',
+                position: LinearElementPosition.outside,
+                //thickness: 10,
+                //sizeUnit: GaugeSizeUnit.factor,
+              ),
+              LinearGaugeRange(
+                startValue: 0,
+                endValue: 10,
+                color: Colors.red,
+                //label: 'Very High',
+                position: LinearElementPosition.outside,
+                //thickness: 10,
+                //sizeUnit: GaugeSizeUnit.factor,
+              ),
+            ],
+          ),
+
+          /*LinearPercentIndicator(
+            width: 140.0,
+            lineHeight: 20.0,
+            percent: min(1, 1 - (_amplitude!.current / -100)),
+            backgroundColor: Colors.grey.shade300,
+            //progressColor: _getDbColor(),
+            alignment: MainAxisAlignment.center,
+            barRadius: const Radius.circular(5.0),
+            clipLinearGradient: true,
+            linearGradient: LinearGradient(
+              colors: [
+                Colors.green.shade100,
+                Colors.green.shade700,
+                Colors.orange,
+                Colors.red,
+              ],
+              stops: const [
+                0.0,
+                0.94,
+                0.97,
+                1.0
+              ], //swetspot between -6 and -3 dbFS
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+            ),
+            center: Text(
+              '${_amplitude?.current.round() ?? 0}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          if (_amplitude!.max >= 0) ...[
+            const SizedBox(height: 10),
+            Text(
+              'CLIP',
+              style: TextStyle(
+                color: colors.error,
+                fontWeight: FontWeight.bold,
+                backgroundColor: colors.error.withOpacity(0.1),
+              ),
+            ),
+          ],*/
         ],
       ],
     );

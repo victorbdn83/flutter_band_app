@@ -78,11 +78,12 @@ class _ViewSongScreenState extends State<ViewSongScreen>
               colors.tertiaryContainer,
               Icons.mic,
             ),
-            ElevatedButton(
-                child: const Text("Record"),
-                onPressed: () {
-                  showRecording();
-                }),
+            FloatingActionButton(
+              onPressed: () {
+                showRecording();
+              },
+              child: const Icon(Icons.mic),
+            ),
           ],
 
           /*
